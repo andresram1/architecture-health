@@ -1,0 +1,35 @@
+
+
+<mat-card class="example-card">
+  <mat-card-title>Security Health - Sensitive Information</mat-card-title>
+  <mat-card-subtitle>Repo 1</mat-card-subtitle>
+  <mat-card-content>
+    <h1>{{getSummary() | status }}</h1>
+  </mat-card-content>
+</mat-card>
+
+<mat-divider></mat-divider>
+
+<h2>List of findings</h2>
+
+<mat-accordion>
+  <mat-expansion-panel hideToggle *ngFor="let b of getFindings()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Branch name:
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ b.name }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-list dense>
+      <mat-list-item *ngFor="let finding of b.advanceFindings">
+        Line: {{ finding.line }}
+        Desc: {{ finding.finding }}
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+
+
+
+
