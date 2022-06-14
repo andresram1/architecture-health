@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Finding} from "../../model/finding.model";
 import {BRANCHES} from "../../mock/mock-branches";
+import {PieChartData} from "../../model/pie-chart.model";
+import {PieChartComponent} from "../pie-chart/pie-chart.component";
 
 @Component({
   selector: 'app-repo-status',
@@ -10,10 +12,14 @@ import {BRANCHES} from "../../mock/mock-branches";
 export class RepoStatusComponent implements OnInit {
 
   branchStatus: Finding[] = BRANCHES;
+  pieChartData: PieChartData;
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit(): void {
+
   }
 
   getSummary(): number {
@@ -25,7 +31,14 @@ export class RepoStatusComponent implements OnInit {
     }).length;
     const total = this.branchStatus.length;
     const formula = (1 - findings/total)*100;
-    console.log(formula)
+    //console.log(formula)
+
+    const newSerie: PieChartData = {
+      series: [formula, (100-formula)],
+      labels: ["Current Health", "Gap"]
+    };
+    this.pieChartData = newSerie;
+
     return formula
   }
 

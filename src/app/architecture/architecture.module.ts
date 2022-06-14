@@ -8,6 +8,8 @@ import { DocStatusComponent } from './components/doc-status/doc-status.component
 import { SecStatusComponent } from './components/sec-status/sec-status.component';
 import { ArchitectureRoutingModule } from "./architecture-routing.module";
 import { StatusPipe } from './pipes/status.pipe';
+import { NgApexchartsModule } from "ng-apexcharts";
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { StatusPipe } from './pipes/status.pipe';
     RepoStatusComponent,
     DocStatusComponent,
     SecStatusComponent,
-    StatusPipe
+    StatusPipe,
+    PieChartComponent
   ],
   exports: [
     RepoListComponent
@@ -25,7 +28,8 @@ import { StatusPipe } from './pipes/status.pipe';
   imports: [
     CommonModule,
     MaterialModule,
-    ArchitectureRoutingModule
+    ArchitectureRoutingModule,
+    NgApexchartsModule,
   ]
 })
 export class ArchitectureModule { }
