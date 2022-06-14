@@ -36,7 +36,7 @@ type ChartOptions = {
 })
 export class PieChartComponent implements OnInit {
   @Input() pieChartData: PieChartData;
-  public apexPieChartOptions: Partial<ChartOptions>;
+  public apexPieChartOptions!: Partial<ChartOptions> | any;
   //public colors: typeof colors = colors;
 
   public ngOnInit(): void {
@@ -66,8 +66,6 @@ export class PieChartComponent implements OnInit {
       },
     };
 
-
-
     this.apexPieChartOptions = {
       series: this.pieChartData.series,
       chart: {
@@ -75,9 +73,8 @@ export class PieChartComponent implements OnInit {
         height: 400
       },
       colors: [this.calculateHealth(), colors.LIGHT_BLUE],
-      legend: the_legend!,
+      legend: the_legend,
       labels: this.pieChartData.labels
     };
   }
-
 }
