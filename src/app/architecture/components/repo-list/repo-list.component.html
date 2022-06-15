@@ -1,7 +1,19 @@
-<div>
-<app-repo
-  *ngFor="let rep of repos" [repo]="rep">
-
-
-</app-repo>
+<div class="grid-container">
+  <h1 class="mat-h1">List of scanned repos</h1>
+  <mat-grid-list cols="2" >
+    <mat-grid-tile >
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            Repo name
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <app-repo *ngFor="let rep of repos" [repo]="rep"></app-repo>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
+
+

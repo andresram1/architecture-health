@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Finding} from "../../model/finding.model";
 import {SECURITY_MOCK} from "../../mock/mock-security";
+import {PieChartData} from "../../model/pie-chart.model";
 
 @Component({
   selector: 'app-sec-status',
@@ -10,6 +11,7 @@ import {SECURITY_MOCK} from "../../mock/mock-security";
 export class SecStatusComponent implements OnInit {
 
   secStatus: Finding[] = SECURITY_MOCK;
+  pieChartData: PieChartData;
 
   constructor() { }
 
@@ -25,7 +27,12 @@ export class SecStatusComponent implements OnInit {
     }).length;
     const total = this.secStatus.length;
     const formula = (1 - findings/total)*100;
-    console.log(formula)
+    //console.log(formula)
+    const newSerie: PieChartData = {
+      series: [formula, (100-formula)],
+      labels: ["Current Health", "Gap"]
+    };
+    this.pieChartData = newSerie;
     return formula
   }
 

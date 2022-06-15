@@ -2,12 +2,13 @@
 
 <mat-card class="example-card">
   <mat-card-title>Security Health - Sensitive Information</mat-card-title>
-  <mat-card-subtitle>Repo 1</mat-card-subtitle>
+  <mat-card-subtitle>access-control</mat-card-subtitle>
   <mat-card-content>
     <h1>{{getSummary() | status }}</h1>
   </mat-card-content>
 </mat-card>
 
+<app-pie-chart [pieChartData]="pieChartData" ></app-pie-chart>
 <mat-divider></mat-divider>
 
 <h2>List of findings</h2>
@@ -16,7 +17,7 @@
   <mat-expansion-panel hideToggle *ngFor="let b of getFindings()">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Branch name:
+        File name:
       </mat-panel-title>
       <mat-panel-description>
         {{ b.name }}

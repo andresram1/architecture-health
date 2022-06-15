@@ -6,23 +6,15 @@ export const DOCS_MOCK : Finding[] =
 [
   {
     "name":"./README.md",
-    "findings":[
-      "No code snippet were found"
-    ]
+    "findings":[]
   },
   {
     "name":"./SECURITY.md",
-    "findings":[
-      "No code snippet were found"
-    ]
+    "findings":[]
   },
   {
     "name":"./stream-transactions/transactions-generator-processor/readme.md",
-    "findings":[
-      "No subtitle were found",
-      "No code snippet were found",
-      "The files doesn't provide enough info about its purpose"
-    ]
+    "findings":[]
   },
   {
     "name":"./stream-approvals/readme.md",

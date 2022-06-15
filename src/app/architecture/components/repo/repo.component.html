@@ -1,9 +1,14 @@
 <section>
   <div class="example-label">{{repo.name}}</div>
   <div class="example-button-row">
-    <a mat-raised-button color="primary" href="doc-status/{{repo.id}}">Documentation</a>
-    <a mat-raised-button color="accent" href="repo-status/{{repo.id}}">Status</a>
-    <a mat-raised-button color="warn" href="sec-status/{{repo.id}}">Security</a>
+    <a mat-button href="doc-status/{{repo.id}}" title="Documentation Health">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">abc</mat-icon>
+    </a>
+    <a mat-button href="repo-status/{{repo.id}}" title="Repository Health">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">bug_report</mat-icon>
+    </a>
+    <a mat-button href="sec-status/{{repo.id}}" title="Security Health">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">lock</mat-icon>
+    </a>
   </div>
 </section>
-

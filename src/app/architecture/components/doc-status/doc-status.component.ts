@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Finding} from "../../model/finding.model";
 import {DOCS_MOCK} from "../../mock/mock-docs";
+import {PieChartData} from "../../model/pie-chart.model";
 
 @Component({
   selector: 'app-doc-status',
@@ -10,6 +11,7 @@ import {DOCS_MOCK} from "../../mock/mock-docs";
 export class DocStatusComponent implements OnInit {
 
   docStatus: Finding[] = DOCS_MOCK;
+  pieChartData: PieChartData;
 
   constructor() { }
 
@@ -25,7 +27,12 @@ export class DocStatusComponent implements OnInit {
     }).length;
     const total = this.docStatus.length;
     const formula = (1 - findings/total)*100;
-    console.log(formula)
+    //console.log(formula)
+    const newSerie: PieChartData = {
+      series: [formula, (100-formula)],
+      labels: ["Current Health", "Gap"]
+    };
+    this.pieChartData = newSerie;
     return formula
   }
 

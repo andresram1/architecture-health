@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Finding} from "../../model/finding.model";
 import {BRANCHES} from "../../mock/mock-branches";
 import {PieChartData} from "../../model/pie-chart.model";
-import {PieChartComponent} from "../pie-chart/pie-chart.component";
+
 
 @Component({
   selector: 'app-repo-status',
@@ -14,13 +14,9 @@ export class RepoStatusComponent implements OnInit {
   branchStatus: Finding[] = BRANCHES;
   pieChartData: PieChartData;
 
-  constructor() {
+  constructor() { }
 
-  }
-
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   getSummary(): number {
 
