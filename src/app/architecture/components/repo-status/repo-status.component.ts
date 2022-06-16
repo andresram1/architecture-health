@@ -24,7 +24,8 @@ export class RepoStatusComponent implements OnInit {
   }
 
   getSummary(): number {
-    this.branchStatus = this.repoStatusService.getRepoStatusByRepo(this.repo_id);
+    this.repoStatusService.getRepoStatusByRepo(this.repo_id)
+      .subscribe(data => this.branchStatus = data);
     const findings = this.branchStatus.filter(b => {
       if (b.findings != undefined) {
         return b.findings?.length > 0;

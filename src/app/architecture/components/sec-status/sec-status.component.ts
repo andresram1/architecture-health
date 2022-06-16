@@ -23,7 +23,8 @@ export class SecStatusComponent implements OnInit {
   }
 
   getSummary(): number {
-    this.secStatus = this.secStatusService.getSecStatusByRepo(this.repo_id);
+    this.secStatusService.getSecStatusByRepo(this.repo_id)
+      .subscribe(data => this.secStatus = data);
     const findings = this.secStatus.filter(b => {
       if (b.advanceFindings != undefined) {
         return b.advanceFindings?.length > 0;

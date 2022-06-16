@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Finding } from "../model/finding.model";
+import {Injectable} from '@angular/core';
+import {Finding} from "../model/finding.model";
 import {DOCS_MOCK} from "../mock/mock-docs";
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,14 @@ export class DocStatusService {
   constructor() {
   }
 
-  getAllDocStatus(): Finding[] {
-    return DOCS_MOCK;
+  getAllDocStatus(): Observable<Finding[]> {
+    const data =  of(DOCS_MOCK);
+    return data;
   }
 
-  getDocStatusByRepo(id: string): Finding[] {
-    return DOCS_MOCK;
+  getDocStatusByRepo(id: string): Observable<Finding[]> {
+    const data =  of(DOCS_MOCK);
+    return data;
   }
 
 }

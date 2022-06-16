@@ -24,7 +24,8 @@ export class DocStatusComponent implements OnInit {
   }
 
   getSummary(): number {
-    this.docStatus = this.docStatusService.getDocStatusByRepo(this.repo_id);
+    this.docStatusService.getDocStatusByRepo(this.repo_id)
+      .subscribe(docs => this.docStatus = docs);
     const findings = this.docStatus.filter(b => {
       if (b.findings != undefined) {
         return b.findings?.length > 0;
