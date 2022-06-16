@@ -11,15 +11,15 @@ const routes: Routes = [
     component: RepoListComponent
   },
   {
-    path: 'doc-status/:id',
+    path: 'architecture/doc-status/:id',
     component: DocStatusComponent
   },
   {
-    path: 'repo-status/:id',
+    path: 'architecture/repo-status/:id',
     component: RepoStatusComponent
   },
   {
-    path: 'sec-status/:id',
+    path: 'architecture/sec-status/:id',
     component: SecStatusComponent
   },
 

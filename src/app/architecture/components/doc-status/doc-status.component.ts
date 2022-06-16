@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Finding} from "../../model/finding.model";
-import {DOCS_MOCK} from "../../mock/mock-docs";
-import {PieChartData} from "../../model/pie-chart.model";
+import { Finding } from "../../model/finding.model";
+import { DOCS_MOCK } from "../../mock/mock-docs";
+import { PieChartData } from "../../model/pie-chart.model";
+import { DocStatusService } from "../../services/doc-status.service";
 
 @Component({
   selector: 'app-doc-status',
@@ -10,16 +11,16 @@ import {PieChartData} from "../../model/pie-chart.model";
 })
 export class DocStatusComponent implements OnInit {
 
-  docStatus: Finding[] = DOCS_MOCK;
+  docStatus: Finding[] = [];
   pieChartData: PieChartData;
 
-  constructor() { }
+  constructor(private docStatusService: DocStatusService) { }
 
   ngOnInit(): void {
   }
 
   getSummary(): number {
-
+    this.docStatus = this.docStatusService.getAllDocStatus();
     const findings = this.docStatus.filter(b => {
       if (b.findings != undefined) {
         return b.findings?.length > 0;
