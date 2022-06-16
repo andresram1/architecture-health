@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Finding } from "../../model/finding.model";
-import { DOCS_MOCK } from "../../mock/mock-docs";
-import { PieChartData } from "../../model/pie-chart.model";
-import { DocStatusService } from "../../services/doc-status.service";
+import {Component, OnInit} from '@angular/core';
+import {Finding} from "../../model/finding.model";
+import {PieChartData} from "../../model/pie-chart.model";
+import {DocStatusService} from "../../services/doc-status.service";
+import {ActivatedRoute} from '@angular/router';
+
 
 @Component({
   selector: 'app-doc-status',
@@ -13,14 +14,17 @@ export class DocStatusComponent implements OnInit {
 
   docStatus: Finding[] = [];
   pieChartData: PieChartData;
+  repo_id: string;
 
-  constructor(private docStatusService: DocStatusService) { }
+  constructor(private activatedRoute: ActivatedRoute,
+              private docStatusService: DocStatusService) { }
 
   ngOnInit(): void {
+    this.repo_id = this.activatedRoute.snapshot.paramMap.get('id')!;
   }
 
   getSummary(): number {
-    this.docStatus = this.docStatusService.getAllDocStatus();
+    this.docStatus = this.docStatusService.getDocStatusByRepo(this.repo_id);
     const findings = this.docStatus.filter(b => {
       if (b.findings != undefined) {
         return b.findings?.length > 0;
@@ -29,11 +33,10 @@ export class DocStatusComponent implements OnInit {
     const total = this.docStatus.length;
     const formula = (1 - findings/total)*100;
     //console.log(formula)
-    const newSerie: PieChartData = {
-      series: [formula, (100-formula)],
+    this.pieChartData = {
+      series: [formula, (100 - formula)],
       labels: ["Current Health", "Gap"]
     };
-    this.pieChartData = newSerie;
     return formula
   }
 

@@ -10,6 +10,7 @@ import { ArchitectureRoutingModule } from "./architecture-routing.module";
 import { StatusPipe } from './pipes/status.pipe';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -25,11 +26,12 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
   exports: [
     RepoListComponent
   ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    ArchitectureRoutingModule,
-    NgApexchartsModule,
-  ]
+    imports: [
+        CommonModule,
+        MaterialModule,
+        ArchitectureRoutingModule,
+        NgApexchartsModule,
+        FormsModule,
+    ]
 })
 export class ArchitectureModule { }

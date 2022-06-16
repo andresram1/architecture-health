@@ -1,7 +1,7 @@
 <section>
   <div class="example-label">{{repo.name}}</div>
   <div class="example-button-row">
-    <a mat-button href="architecture/doc-status/{{repo.id}}" title="Documentation Health">
+    <a mat-button [routerLink]="['/architecture/doc-status', repo.id]"  title="Documentation Health">
       <mat-icon aria-hidden="false" aria-label="Example home icon">abc</mat-icon>
     </a>
     <a mat-button href="architecture/repo-status/{{repo.id}}" title="Repository Health">

@@ -10,14 +10,11 @@ export class DocStatusService {
   }
 
   getAllDocStatus(): Finding[] {
-    console.log("Retrieving all doc status...");
     return DOCS_MOCK;
   }
 
-  getDocStatusByRepo(id: string): string {
-    //return Finding[];
-    return "hello";
+  getDocStatusByRepo(id: string): Finding[] {
+    return DOCS_MOCK;
   }
-
 
 }
