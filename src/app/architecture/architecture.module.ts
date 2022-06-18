@@ -11,6 +11,8 @@ import { StatusPipe } from './pipes/status.pipe';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import {FormsModule} from "@angular/forms";
+import {docStatusHttpInterceptorProvider} from "./interceptors/doc-status-http-interceptor";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -26,12 +28,16 @@ import {FormsModule} from "@angular/forms";
   exports: [
     RepoListComponent
   ],
-    imports: [
-        CommonModule,
-        MaterialModule,
-        ArchitectureRoutingModule,
-        NgApexchartsModule,
-        FormsModule,
-    ]
+  imports: [
+      CommonModule,
+      MaterialModule,
+      ArchitectureRoutingModule,
+      NgApexchartsModule,
+      FormsModule,
+      HttpClientModule
+  ],
+  providers: [
+    docStatusHttpInterceptorProvider,
+  ]
 })
 export class ArchitectureModule { }

@@ -3,6 +3,7 @@ import {Finding} from "../../model/finding.model";
 import {PieChartData} from "../../model/pie-chart.model";
 import {DocStatusService} from "../../services/doc-status.service";
 import {ActivatedRoute} from '@angular/router';
+import {Summary} from "../../model/summary.model";
 
 
 @Component({
@@ -12,42 +13,39 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class DocStatusComponent implements OnInit {
 
-  docStatus: Finding[] = [];
+  docStatus: Summary;
   pieChartData: PieChartData;
   repo_id: string;
+
+  findings: number;
+  total: number;
+  formula: number;
+  finding_list: Finding[];
 
   constructor(private activatedRoute: ActivatedRoute,
               private docStatusService: DocStatusService) { }
 
   ngOnInit(): void {
     this.repo_id = this.activatedRoute.snapshot.paramMap.get('id')!;
+    this.docStatusService.getDocStatusByRepo(this.repo_id)
+      .subscribe(docs => {
+        this.docStatus = docs;
+        this.finding_list = docs.finding_list;
+        this.findings = docs.total_issues;
+        this.total = docs.total_files;
+        this.formula  = (1 - docs.total_issues / docs.total_files)*100;
+        this.pieChartData = {
+          series: [this.formula, (100 - this.formula)],
+          labels: ["Current Health", "Gap"]
+        };
+      });
   }
 
   getSummary(): number {
-    this.docStatusService.getDocStatusByRepo(this.repo_id)
-      .subscribe(docs => this.docStatus = docs);
-    const findings = this.docStatus.filter(b => {
-      if (b.findings != undefined) {
-        return b.findings?.length > 0;
-      }
-    }).length;
-    const total = this.docStatus.length;
-    const formula = (1 - findings/total)*100;
-    //console.log(formula)
-    this.pieChartData = {
-      series: [formula, (100 - formula)],
-      labels: ["Current Health", "Gap"]
-    };
-    return formula
+    return this.formula
   }
 
   getFindings(): Finding[] {
-    // console.log(this.branchStatus.filter(b => b.findings.length > 0));
-    return this.docStatus.filter(b => {
-      if (b.findings != undefined) {
-        return b.findings?.length > 0;
-      }
-    });
+    return this.finding_list;
   }
-
 }
