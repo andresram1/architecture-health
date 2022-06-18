@@ -13,6 +13,8 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import {FormsModule} from "@angular/forms";
 import {docStatusHttpInterceptorProvider} from "./interceptors/doc-status-http-interceptor";
 import {HttpClientModule} from "@angular/common/http";
+import {repoStatusHttpInterceptorProvider} from "./interceptors/repo-status-http-interceptor";
+import {secStatusHttpInterceptorProvider} from "./interceptors/sec-status-http-interceptor";
 
 
 @NgModule({
@@ -37,7 +39,7 @@ import {HttpClientModule} from "@angular/common/http";
       HttpClientModule
   ],
   providers: [
-    docStatusHttpInterceptorProvider,
+    docStatusHttpInterceptorProvider, repoStatusHttpInterceptorProvider, secStatusHttpInterceptorProvider
   ]
 })
 export class ArchitectureModule { }

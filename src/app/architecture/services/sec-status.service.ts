@@ -1,20 +1,32 @@
 import {Injectable} from '@angular/core';
-import {Finding} from "../model/finding.model";
 import {SECURITY_MOCK} from "../mock/mock-security";
 import {Observable, of} from "rxjs";
+import {Summary} from "../model/summary.model";
+import {GenericService} from "./generic-service";
+import {HttpClient} from "@angular/common/http";
+import {catchError, retry} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
-export class SecStatusService {
-  constructor() {
+export class SecStatusService extends GenericService {
+  private thesUrl = 'api/sec-status';  // URL to web api
+
+  constructor(
+    private http: HttpClient
+  ) {
+    super();
   }
 
-  getAllSecStatus(): Observable<Finding[]> {
+  getAllSecStatus(): Observable<Summary> {
     return of(SECURITY_MOCK);
   }
 
-  getSecStatusByRepo(id: string): Observable<Finding[]> {
-    return of(SECURITY_MOCK);
+  getSecStatusByRepo(id: string): Observable<Summary> {
+    return this.http.get<Summary>(this.thesUrl+"/"+id)
+      .pipe(
+        retry(3), // retry a failed request up to 3 times
+        catchError(this.handleError) // then handle the error
+      );
   }
 }

@@ -4,11 +4,13 @@
   <mat-card-title>Repository Health</mat-card-title>
   <mat-card-subtitle>access-control</mat-card-subtitle>
   <mat-card-content>
-    <h1>{{getSummary() | status }}</h1>
+    <h1 *ngIf="total>0">{{getSummary() | status }}</h1>
     </mat-card-content>
 </mat-card>
 
-<app-pie-chart [pieChartData]="pieChartData" ></app-pie-chart>
+<div *ngIf="pieChartData">
+  <app-pie-chart [pieChartData]="pieChartData" ></app-pie-chart>
+</div>
 <mat-divider></mat-divider>
 
 <h2>List of findings</h2>

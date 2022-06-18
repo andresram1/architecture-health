@@ -11,9 +11,9 @@ import {Observable} from "rxjs";
 import {delay} from "rxjs/operators";
 
 @Injectable()
-export class DocStatusHttpInterceptor implements HttpInterceptor {
+export class SecStatusHttpInterceptor implements HttpInterceptor {
   // default doc status json-data path
-  private _docStatusJsonPath = "assets/json-data/mock-doc-status.json";
+  private _repoStatusJsonPath = "assets/json-data/mock-sec-status.json";
 
   constructor(private http: HttpClient) {}
 
@@ -32,11 +32,11 @@ export class DocStatusHttpInterceptor implements HttpInterceptor {
   handleRequests(req: HttpRequest<any>, next: HttpHandler): any {
     const { url, method } = req;
 
-    if (url.match(/\/doc-status\/.*/) && method === "GET") {
+    if (url.match(/\/sec-status\/.*/) && method === "GET") {
       const repoId = this.getRepoId(url);
 
       req = req.clone({
-        url: this._docStatusJsonPath,
+        url: this._repoStatusJsonPath,
       });
       return next.handle(req).pipe(delay(500));
     }
@@ -58,8 +58,8 @@ export class DocStatusHttpInterceptor implements HttpInterceptor {
 /**
  * Mock backend provider definition for app.module.ts provider.
  */
-export let docStatusHttpInterceptorProvider = {
+export let secStatusHttpInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,
-  useClass: DocStatusHttpInterceptor,
+  useClass: SecStatusHttpInterceptor,
   multi: true,
 };

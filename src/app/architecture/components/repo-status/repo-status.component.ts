@@ -3,6 +3,7 @@ import {Finding} from "../../model/finding.model";
 import {PieChartData} from "../../model/pie-chart.model";
 import {ActivatedRoute} from '@angular/router';
 import {RepoStatusService} from "../../services/repo-status.service";
+import {Summary} from "../../model/summary.model";
 
 
 @Component({
@@ -12,44 +13,44 @@ import {RepoStatusService} from "../../services/repo-status.service";
 })
 export class RepoStatusComponent implements OnInit {
 
-  branchStatus: Finding[] = [];
+  branchStatus: Summary;
   pieChartData: PieChartData;
   repo_id: string;
+
+  findings: number;
+  total: number;
+  formula: number;
+  finding_list: Finding[];
 
   constructor(private activatedRoute: ActivatedRoute,
               private repoStatusService: RepoStatusService) { }
 
   ngOnInit(): void {
     this.repo_id = this.activatedRoute.snapshot.paramMap.get('id')!;
+    this.repoStatusService.getRepoStatusByRepo(this.repo_id)
+      .subscribe(repoStatusData => {
+        this.branchStatus = repoStatusData;
+        this.finding_list = repoStatusData.finding_list.filter(b => {
+          if (b.findings != undefined) {
+            return b.findings?.length > 0;
+          }
+        });
+        this.findings = repoStatusData.total_issues;
+        this.total = repoStatusData.total_files;
+        this.formula  = (1 - repoStatusData.total_issues / repoStatusData.total_files)*100;
+        this.pieChartData = {
+          series: [this.formula, (100 - this.formula)],
+          labels: ["Current Health", "Gap"]
+        };
+      });
   }
 
   getSummary(): number {
-    this.repoStatusService.getRepoStatusByRepo(this.repo_id)
-      .subscribe(data => this.branchStatus = data);
-    const findings = this.branchStatus.filter(b => {
-      if (b.findings != undefined) {
-        return b.findings?.length > 0;
-      }
-    }).length;
-    const total = this.branchStatus.length;
-    const formula = (1 - findings/total)*100;
-    //console.log(formula)
-
-    this.pieChartData = {
-      series: [formula, (100 - formula)],
-      labels: ["Current Health", "Gap"]
-    };
-
-    return formula
+    return this.formula
   }
 
   getFindings(): Finding[] {
-    // console.log(this.branchStatus.filter(b => b.findings.length > 0));
-    return this.branchStatus.filter(b => {
-      if (b.findings != undefined) {
-        return b.findings?.length > 0;
-      }
-    });
+    return this.finding_list;
   }
 
 }

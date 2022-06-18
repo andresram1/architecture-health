@@ -30,7 +30,11 @@ export class DocStatusComponent implements OnInit {
     this.docStatusService.getDocStatusByRepo(this.repo_id)
       .subscribe(docs => {
         this.docStatus = docs;
-        this.finding_list = docs.finding_list;
+        this.finding_list = docs.finding_list.filter(b => {
+          if (b.findings != undefined) {
+            return b.findings?.length > 0;
+          }
+        });
         this.findings = docs.total_issues;
         this.total = docs.total_files;
         this.formula  = (1 - docs.total_issues / docs.total_files)*100;
