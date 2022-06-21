@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {SECURITY_MOCK} from "../mock/mock-security";
-import {Observable, of} from "rxjs";
+import {Observable, of, take} from "rxjs";
 import {Summary} from "../model/summary.model";
 import {GenericService} from "./generic-service";
 import {HttpClient} from "@angular/common/http";
@@ -25,6 +25,7 @@ export class SecStatusService extends GenericService {
   getSecStatusByRepo(id: string): Observable<Summary> {
     return this.http.get<Summary>(this.thesUrl+"/"+id)
       .pipe(
+        take(1),
         retry(3), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
       );

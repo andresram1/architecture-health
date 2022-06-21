@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {DOCS_MOCK} from "../mock/mock-docs";
-import {Observable, of, throwError} from 'rxjs';
+import {Observable, of, take, throwError} from 'rxjs';
 import {catchError, retry} from "rxjs/operators";
 import {Summary} from "../model/summary.model";
 import {GenericService} from "./generic-service";
@@ -26,6 +26,7 @@ export class DocStatusService extends GenericService {
   getDocStatusByRepo(id: string): Observable<Summary> {
     return this.http.get<Summary>(this.thesUrl+"/"+id)
       .pipe(
+        take(1),
         retry(3), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
       );
