@@ -12,25 +12,25 @@ export const DOCS_MOCK : Summary =
     finding_list: [
       {
         "name":"./README.md",
-        "findings":[]
+        "details":[]
       },
       {
         "name":"./SECURITY.md",
-        "findings":[]
+        "details":[]
       },
       {
         "name":"./stream-transactions/transactions-generator-processor/readme.md",
-        "findings":[]
+        "details":[]
       },
       {
         "name":"./stream-approvals/readme.md",
-        "findings":[
+        "details":[
           "No subtitle were found"
         ]
       },
       {
         "name":"./stream-approvals/approvals-bootstrap-task/readme.md",
-        "findings":[
+        "details":[
           "No title were found",
           "No subtitle were found",
           "No code snippet were found",
@@ -39,7 +39,7 @@ export const DOCS_MOCK : Summary =
       },
       {
         "name":"./stream-dbs-clients/readme.md",
-        "findings":[
+        "details":[
           "No subtitle were found",
           "No code snippet were found",
           "The files doesn't provide enough info about its purpose"
@@ -47,14 +47,14 @@ export const DOCS_MOCK : Summary =
       },
       {
         "name":"./stream-product-catalog/product-catalog-http/readme.md",
-        "findings":[
+        "details":[
           "No code snippet were found",
           "The files doesn't provide enough info about its purpose"
         ]
       },
       {
         "name":"./stream-legal-entity/legal-entity-bootstrap-task/readme.md",
-        "findings":[
+        "details":[
           "No title were found",
           "No subtitle were found",
           "No code snippet were found",
@@ -63,7 +63,7 @@ export const DOCS_MOCK : Summary =
       },
       {
         "name":"./stream-models/product-catalog-model/target/generated-sources/openapi/README.md",
-        "findings":[
+        "details":[
           "No code snippet were found",
           "The files doesn't provide enough info about its purpose"
         ]

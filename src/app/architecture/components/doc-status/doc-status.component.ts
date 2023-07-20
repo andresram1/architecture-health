@@ -31,8 +31,8 @@ export class DocStatusComponent implements OnInit {
       .subscribe(docs => {
         this.docStatus = docs;
         this.finding_list = docs.finding_list.filter(b => {
-          if (b.findings != undefined) {
-            return b.findings?.length > 0;
+          if (b.details != undefined) {
+            return b.details?.length > 0;
           }
         });
         this.findings = docs.total_issues;

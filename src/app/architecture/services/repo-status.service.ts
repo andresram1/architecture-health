@@ -10,7 +10,7 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class RepoStatusService extends GenericService {
-  private thesUrl = 'api/repo-status';  // URL to web api
+  private theUrl = 'api/repo-status';  // URL to web api
 
   constructor(
     private http: HttpClient
@@ -24,7 +24,7 @@ export class RepoStatusService extends GenericService {
   }
 
   getRepoStatusByRepo(id: string): Observable<Summary> {
-    return this.http.get<Summary>(this.thesUrl+"/"+id)
+    return this.http.get<Summary>(this.theUrl+"/"+id)
       .pipe(
         take(1),
         retry(3), // retry a failed request up to 3 times

@@ -10,7 +10,7 @@ import {catchError, retry} from "rxjs/operators";
   providedIn: 'root'
 })
 export class SecStatusService extends GenericService {
-  private thesUrl = 'api/sec-status';  // URL to web api
+  private theUrl = 'api/sec-status';  // URL to web api
 
   constructor(
     private http: HttpClient
@@ -23,7 +23,7 @@ export class SecStatusService extends GenericService {
   }
 
   getSecStatusByRepo(id: string): Observable<Summary> {
-    return this.http.get<Summary>(this.thesUrl+"/"+id)
+    return this.http.get<Summary>(this.theUrl+"/"+id)
       .pipe(
         take(1),
         retry(3), // retry a failed request up to 3 times

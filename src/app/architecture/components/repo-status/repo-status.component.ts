@@ -31,8 +31,8 @@ export class RepoStatusComponent implements OnInit {
       .subscribe(repoStatusData => {
         this.branchStatus = repoStatusData;
         this.finding_list = repoStatusData.finding_list.filter(b => {
-          if (b.findings != undefined) {
-            return b.findings?.length > 0;
+          if (b.details != undefined) {
+            return b.details?.length > 0;
           }
         });
         this.findings = repoStatusData.total_issues;

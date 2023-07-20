@@ -1,6 +1,6 @@
 export interface Finding {
   name: string;
-  findings?: string[];
+  details?: string[];
   advanceFindings?: AdvancedFinding[];
 }
 
