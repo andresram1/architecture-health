@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Finding} from "../../model/finding.model";
+import {AdvancedFinding, Finding} from "../../model/finding.model";
 import {PieChartData} from "../../model/pie-chart.model";
 import {ActivatedRoute} from '@angular/router';
 import {SecStatusService} from "../../services/sec-status.service";
@@ -12,14 +12,14 @@ import {Summary} from "../../model/summary.model";
 })
 export class SecStatusComponent implements OnInit {
 
-  secStatus: Summary;
+  secStatus: Summary<AdvancedFinding>;
   pieChartData: PieChartData;
   repo_id: string;
 
   findings: number;
   total: number;
   formula: number;
-  finding_list: Finding[];
+  finding_list: Finding<AdvancedFinding>[];
 
   constructor(private activatedRoute: ActivatedRoute,
               private secStatusService: SecStatusService) { }
@@ -30,10 +30,10 @@ export class SecStatusComponent implements OnInit {
       .subscribe(secStatusData => {
         this.secStatus = secStatusData;
         this.finding_list = secStatusData.finding_list.filter(b => {
-          if (b.advanceFindings != undefined) {
-            return b.advanceFindings?.length > 0;
+          if (b.details != undefined) {
+            return b.details?.length > 0;
           }
-        });;
+        });
         this.findings = secStatusData.total_issues;
         this.total = secStatusData.total_files;
         this.formula  = (1 - secStatusData.total_issues / secStatusData.total_files)*100;
@@ -48,7 +48,7 @@ export class SecStatusComponent implements OnInit {
     return this.formula
   }
 
-  getFindings(): Finding[] {
+  getFindings(): Finding<AdvancedFinding>[] {
     return this.finding_list;
   }
 

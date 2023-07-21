@@ -18,13 +18,13 @@ export class DocStatusService extends GenericService {
     super();
   }
 
-  getAllDocStatus(): Observable<Summary> {
+  getAllDocStatus(): Observable<Summary<string>> {
     const data =  of(DOCS_MOCK);
     return data;
   }
 
-  getDocStatusByRepo(id: string): Observable<Summary> {
-    return this.http.get<Summary>(this.theUrl+"/"+id)
+  getDocStatusByRepo(id: string): Observable<Summary<string>> {
+    return this.http.get<Summary<string>>(this.theUrl+"/"+id)
       .pipe(
         take(1),
         retry(3), // retry a failed request up to 3 times

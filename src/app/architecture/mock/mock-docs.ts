@@ -3,7 +3,7 @@ import { Finding } from "../model/finding.model";
 import {Summary} from "../model/summary.model";
 
 
-export const DOCS_MOCK : Summary =
+export const DOCS_MOCK : Summary<string> =
   {
     repo_name: "access-control",
     scan_date:  "03/06/2022",

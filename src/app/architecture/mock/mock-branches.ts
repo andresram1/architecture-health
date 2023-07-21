@@ -1,6 +1,6 @@
 import {Summary} from "../model/summary.model";
 
-export const BRANCHES : Summary =
+export const BRANCHES : Summary<string> =
   {
     repo_name: "access-control",
     scan_date: "03/06/2022",

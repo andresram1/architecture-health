@@ -5,6 +5,7 @@ import {Summary} from "../model/summary.model";
 import {GenericService} from "./generic-service";
 import {HttpClient} from "@angular/common/http";
 import {catchError, retry} from "rxjs/operators";
+import {AdvancedFinding} from "../model/finding.model";
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,12 @@ export class SecStatusService extends GenericService {
     super();
   }
 
-  getAllSecStatus(): Observable<Summary> {
+  getAllSecStatus(): Observable<Summary<AdvancedFinding>> {
     return of(SECURITY_MOCK);
   }
 
-  getSecStatusByRepo(id: string): Observable<Summary> {
-    return this.http.get<Summary>(this.theUrl+"/"+id)
+  getSecStatusByRepo(id: string): Observable<Summary<AdvancedFinding>> {
+    return this.http.get<Summary<AdvancedFinding>>(this.theUrl+"/"+id)
       .pipe(
         take(1),
         retry(3), // retry a failed request up to 3 times

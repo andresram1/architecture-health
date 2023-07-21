@@ -18,13 +18,13 @@ export class RepoStatusService extends GenericService {
     super();
   }
 
-  getAllRepoStatus(): Observable<Summary> {
+  getAllRepoStatus(): Observable<Summary<string>> {
     const data =  of(BRANCHES);
     return data;
   }
 
-  getRepoStatusByRepo(id: string): Observable<Summary> {
-    return this.http.get<Summary>(this.theUrl+"/"+id)
+  getRepoStatusByRepo(id: string): Observable<Summary<string>> {
+    return this.http.get<Summary<string>>(this.theUrl+"/"+id)
       .pipe(
         take(1),
         retry(3), // retry a failed request up to 3 times

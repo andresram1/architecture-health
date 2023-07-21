@@ -13,14 +13,14 @@ import {Summary} from "../../model/summary.model";
 })
 export class DocStatusComponent implements OnInit {
 
-  docStatus: Summary;
+  docStatus: Summary<string>;
   pieChartData: PieChartData;
   repo_id: string;
 
   findings: number;
   total: number;
   formula: number;
-  finding_list: Finding[];
+  finding_list: Finding<string>[];
 
   constructor(private activatedRoute: ActivatedRoute,
               private docStatusService: DocStatusService) { }
@@ -49,7 +49,7 @@ export class DocStatusComponent implements OnInit {
     return this.formula
   }
 
-  getFindings(): Finding[] {
+  getFindings(): Finding<string>[] {
     return this.finding_list;
   }
 }

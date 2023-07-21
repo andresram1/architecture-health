@@ -1,7 +1,7 @@
-export interface Finding {
+export interface Finding<Type> {
   name: string;
-  details?: string[];
-  advanceFindings?: AdvancedFinding[];
+  details?: Type[];
+  //advanceFindings?: AdvancedFinding[];
 }
 
 export interface AdvancedFinding {

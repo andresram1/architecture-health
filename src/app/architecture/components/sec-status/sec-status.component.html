@@ -27,9 +27,9 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-list dense>
-      <mat-list-item *ngFor="let finding of b.advanceFindings">
-        Line: {{ finding.line }}
-        Desc: {{ finding.finding }}
+      <mat-list-item *ngFor="let detail of b.details">
+        Line: {{ detail.line }}
+        Desc: {{ detail.finding }}
       </mat-list-item>
     </mat-list>
   </mat-expansion-panel>
